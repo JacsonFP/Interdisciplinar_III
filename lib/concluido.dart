@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:interdisciplinar/chamados_ver.dart';
 
 class Concluido extends StatefulWidget {
   @override
@@ -10,6 +11,19 @@ class _ConcluidoState extends State<Concluido> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Chamados concluídos",
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ChamadosVer()));
+        },
+      ),
       body: Container(
         padding: EdgeInsets.all(10.0),
         child: Column(
@@ -59,7 +73,19 @@ class _ConcluidoState extends State<Concluido> {
                                     style: TextStyle(fontSize: 15)),
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[],
+                                  children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(Icons.assignment),
+                                      color: Colors.black,
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChamadosVer()));
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ));
                             });

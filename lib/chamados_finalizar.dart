@@ -53,16 +53,18 @@ class _ChamadosFinalizarState extends State<ChamadosFinalizar> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   RaisedButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    child: Text("Finalizar"),
-                    onPressed: () {
-                      Firestore.instance.collection("chamados").add({
-                        "finalizar": finalizar.text,
-                        "status": "3",
-                      });
-                    },
-                  )
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: Text("Finalizar"),
+                      onPressed: () {
+                        Firestore.instance
+                            .collection("chamados")
+                            .document(widget.dadosChamado.documentID)
+                            .updateData({
+                          "finalizar": finalizar.text,
+                          "status": "3",
+                        });
+                      })
                 ],
               )
             ],

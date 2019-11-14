@@ -11,6 +11,12 @@ class _AndamentoState extends State<Andamento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Chamados em andamento",
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.all(10.0),
         child: Column(

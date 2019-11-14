@@ -13,6 +13,12 @@ class _EsperaState extends State<Espera> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Chamado em espera",
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -29,7 +35,8 @@ class _EsperaState extends State<Espera> {
             Expanded(
               child: StreamBuilder(
                   stream: Firestore.instance
-                      .collection("chamados").where("status", isEqualTo: "1")
+                      .collection("chamados")
+                      .where("status", isEqualTo: "1")
                       .orderBy("titulo")
                       .snapshots(),
                   builder: (context, snapshot) {
@@ -71,8 +78,7 @@ class _EsperaState extends State<Espera> {
                                 trailing: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
-                                    
-                                    IconButton( 
+                                    IconButton(
                                       icon: Icon(Icons.build),
                                       color: Colors.black,
                                       onPressed: () {
