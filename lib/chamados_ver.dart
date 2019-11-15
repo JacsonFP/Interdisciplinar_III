@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ChamadosVer extends StatefulWidget {
@@ -8,8 +9,10 @@ class ChamadosVer extends StatefulWidget {
 class _ChamadosVerState extends State<ChamadosVer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      body: Column(
+        children: <Widget>[],
+      ),
     );
   }
 }
