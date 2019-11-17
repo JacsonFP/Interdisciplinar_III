@@ -14,7 +14,7 @@ class _ConcluidoState extends State<Concluido> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Chamados em andamento",
+          "Chamados concluídos",
           style: TextStyle(fontSize: 20),
         ),
       ),

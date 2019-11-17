@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'chamados_finalizar.dart';
 
 class ChamadosVer extends StatefulWidget {
   final String tipoEdicao;
@@ -50,11 +51,11 @@ class _ChamadosVerState extends State<ChamadosVer> {
     if (widget.tipoEdicao == "alt") {
       titulo.text = widget.dadosChamado.data["titulo"].toString();
       descricao.text = widget.dadosChamado.data["descricao"].toString();
+      finalizar.text = widget.dadosChamado.data["finalizar"].toString();
       valorFilial = widget.dadosChamado.data["filiais"].toString();
       valorCategoria = widget.dadosChamado.data["categoria"].toString();
       valorPrioridade = widget.dadosChamado.data["prioridade"].toString();
       valorTipo = widget.dadosChamado.data["tipo"].toString();
-      finalizar.text = widget.dadosChamado.data["finalizar"].toString();
     }
   }
 
@@ -110,26 +111,6 @@ class _ChamadosVerState extends State<ChamadosVer> {
                       }
                       return null;
                     },
-                  ),
-                  TextFormField(
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    enabled: widget.tipoEdicao == "alt" ? false : true,
-                    decoration: InputDecoration(
-                        labelText: "Solução",
-                        labelStyle:
-                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
-                    textAlign: TextAlign.left,
-                    controller: finalizar,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return "Informe uma Solução";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 0,
                   ),
                   DropdownButton<String>(
                     hint: Text("Selecione uma Filial"),
@@ -208,6 +189,26 @@ class _ChamadosVerState extends State<ChamadosVer> {
                     value: valorTipo,
                     elevation: 2,
                     iconSize: 20.0,
+                  ),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Solução",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: finalizar,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Solução";
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 0,
                   ),
                   SizedBox(
                     height: 10.0,
