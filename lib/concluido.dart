@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:interdisciplinar/chamados_pesquisar.dart';
 import 'package:interdisciplinar/chamados_ver.dart';
 
 class Concluido extends StatefulWidget {
@@ -13,15 +14,15 @@ class _ConcluidoState extends State<Concluido> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Chamados concluídos",
+          "Chamados em andamento",
           style: TextStyle(fontSize: 20),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ChamadosVer()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ChamadosPesquisar()));
         },
       ),
       body: Container(
@@ -82,7 +83,10 @@ class _ConcluidoState extends State<Concluido> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChamadosVer()));
+                                                    ChamadosVer(
+                                                        "alt",
+                                                        snapshot.data.documents[
+                                                            index])));
                                       },
                                     ),
                                   ],
