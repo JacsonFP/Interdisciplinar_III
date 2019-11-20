@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'chamados_finalizar.dart';
 
 class ChamadosVer extends StatefulWidget {
   final String tipoEdicao;
@@ -42,7 +41,14 @@ class _ChamadosVerState extends State<ChamadosVer> {
   TextEditingController titulo = TextEditingController();
   TextEditingController descricao = TextEditingController();
   TextEditingController filiais = TextEditingController();
+  TextEditingController categoria = TextEditingController();
+  TextEditingController tipo = TextEditingController();
+  TextEditingController prioridade = TextEditingController();
   TextEditingController finalizar = TextEditingController();
+  TextEditingController dataCriacao = TextEditingController();
+  TextEditingController dataAndamento = TextEditingController();
+  TextEditingController dataFinalizar = TextEditingController();
+
 
   @override
   void initState() {
@@ -52,10 +58,13 @@ class _ChamadosVerState extends State<ChamadosVer> {
       titulo.text = widget.dadosChamado.data["titulo"].toString();
       descricao.text = widget.dadosChamado.data["descricao"].toString();
       finalizar.text = widget.dadosChamado.data["finalizar"].toString();
-      valorFilial = widget.dadosChamado.data["filiais"].toString();
-      valorCategoria = widget.dadosChamado.data["categoria"].toString();
-      valorPrioridade = widget.dadosChamado.data["prioridade"].toString();
-      valorTipo = widget.dadosChamado.data["tipo"].toString();
+      filiais.text = widget.dadosChamado.data["filiais"].toString();
+      categoria.text = widget.dadosChamado.data["categoria"].toString();
+      prioridade.text = widget.dadosChamado.data["prioridade"].toString();
+      tipo.text = widget.dadosChamado.data["tipo"].toString();
+      dataCriacao.text = widget.dadosChamado.data["data_criacao"].toString();
+      dataAndamento.text = widget.dadosChamado.data["data_andamento"].toString();
+      dataFinalizar.text = widget.dadosChamado.data["data_finalizar"].toString();
     }
   }
 
@@ -112,83 +121,79 @@ class _ChamadosVerState extends State<ChamadosVer> {
                       return null;
                     },
                   ),
-                  DropdownButton<String>(
-                    hint: Text("Selecione uma Filial"),
-                    style: TextStyle(color: Colors.blue),
-                    items: nomeFilial.map((String dropDownStringItem) {
-                      return DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        valorFilial = value;
-                      });
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Local",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: filiais,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Filial";
+                      }
+                      return null;
                     },
-                    value: valorFilial,
-                    elevation: 2,
-                    iconSize: 20.0,
                   ),
-                  DropdownButton<String>(
-                    hint: Text("Selecione uma Categoria"),
-                    style: TextStyle(color: Colors.blue),
-                    items: nomeCategoria.map((String dropDownStringItem) {
-                      return DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        valorCategoria = value;
-                      });
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Categoria",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: categoria,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Categoria";
+                      }
+                      return null;
                     },
-                    value: valorCategoria,
-                    elevation: 2,
-                    iconSize: 20.0,
                   ),
                   SizedBox(
                     height: 0,
                   ),
-                  DropdownButton<String>(
-                    hint: Text("Selecione uma Prioridade"),
-                    style: TextStyle(color: Colors.blue),
-                    items: nomePrioridade.map((String dropDownStringItem) {
-                      return DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        valorPrioridade = value;
-                      });
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Prioridade",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: prioridade,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Prioridade";
+                      }
+                      return null;
                     },
-                    value: valorPrioridade,
-                    elevation: 2,
-                    iconSize: 20.0,
                   ),
                   SizedBox(
                     height: 0,
                   ),
-                  DropdownButton<String>(
-                    hint: Text("Selecione um Tipo"),
-                    style: TextStyle(color: Colors.blue),
-                    items: nomeTipo.map((String dropDownStringItem) {
-                      return DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(dropDownStringItem),
-                      );
-                    }).toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        valorTipo = value;
-                      });
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Tipo",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: tipo,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Tipo";
+                      }
+                      return null;
                     },
-                    value: valorTipo,
-                    elevation: 2,
-                    iconSize: 20.0,
                   ),
                   TextFormField(
                     textInputAction: TextInputAction.next,
@@ -207,44 +212,63 @@ class _ChamadosVerState extends State<ChamadosVer> {
                       return null;
                     },
                   ),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Data de Criação",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: dataCriacao,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Data";
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Data de Atendimento",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: dataAndamento,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma Data";
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.text,
+                    enabled: widget.tipoEdicao == "alt" ? false : true,
+                    decoration: InputDecoration(
+                        labelText: "Data de Finalização",
+                        labelStyle:
+                            TextStyle(color: Colors.blueAccent, fontSize: 18)),
+                    textAlign: TextAlign.left,
+                    controller: dataFinalizar,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Informe uma data";
+                      }
+                      return null;
+                    },
+                  ),
                   SizedBox(
                     height: 0,
                   ),
                   SizedBox(
                     height: 10.0,
                   ),
-                  /*Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      RaisedButton(
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        child: Text("Salvar"),
-                        onPressed: () {
-                          if (widget.tipoEdicao == "inc") {
-                            Firestore.instance.collection("chamados").add({
-                              "titulo": titulo.text,
-                              "descricao": descricao.text,
-                              "filiais": valorFilial,
-                              "status": "1",
-                            });
-                          } else {
-                            Firestore.instance
-                                .collection("chamados")
-                                .document(widget.dadosChamado.documentID)
-                                .updateData({
-                              "filiais": valorFilial,
-                              "categoria": valorCategoria,
-                              "prioridade": valorPrioridade,
-                              "tipo": valorTipo,
-                              
-                            });
-                          }
-                          Navigator.pop(context);
-                        },
-                      )
-                    ],
-                  ),*/
                 ],
               ),
             )));

@@ -37,7 +37,7 @@ class _EsperaState extends State<Espera> {
                   stream: Firestore.instance
                       .collection("chamados")
                       .where("status", isEqualTo: "1")
-                      .orderBy("titulo")
+                      .orderBy("data_criacao")
                       .snapshots(),
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {

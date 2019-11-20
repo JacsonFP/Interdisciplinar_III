@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ChamadosEditar extends StatefulWidget {
   final String tipoEdicao;
@@ -107,7 +108,7 @@ class _ChamadosEditarState extends State<ChamadosEditar> {
                     },
                   ),
                   DropdownButton<String>(
-                    hint: Text("Selecione uma Filial"),
+                    hint: Text("Selecione um Local"),
                     style: TextStyle(color: Colors.blue),
                     items: nomeFilial.map((String dropDownStringItem) {
                       return DropdownMenuItem<String>(
@@ -208,17 +209,21 @@ class _ChamadosEditarState extends State<ChamadosEditar> {
                               "descricao": descricao.text,
                               "filiais": valorFilial,
                               "status": "1",
+                              "data_criacao": new DateFormat("dd/MM/yyyy HH:mm")
+                                  .format(DateTime.now()),
                             });
                           } else {
                             Firestore.instance
                                 .collection("chamados")
                                 .document(widget.dadosChamado.documentID)
                                 .updateData({
-                              "filiais": valorFilial,
+                              //"filiais": valorFilial,
                               "categoria": valorCategoria,
                               "prioridade": valorPrioridade,
                               "tipo": valorTipo,
                               "status": "2",
+                              "data_andamento": new DateFormat("dd/MM/yyyy HH:mm")
+                                  .format(DateTime.now()),
                             });
                           }
                           Navigator.pop(context);

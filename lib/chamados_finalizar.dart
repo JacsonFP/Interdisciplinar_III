@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class ChamadosFinalizar extends StatefulWidget {
   final String tipoEdicao;
@@ -63,7 +64,10 @@ class _ChamadosFinalizarState extends State<ChamadosFinalizar> {
                             .updateData({
                           "finalizar": finalizar.text,
                           "status": "3",
+                          "data_finalizar": new DateFormat("dd/MM/yyyy HH:mm")
+                          .format(DateTime.now()),
                         });
+                        Navigator.pop(context);
                       })
                 ],
               )
